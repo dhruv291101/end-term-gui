@@ -50,14 +50,14 @@ def import_and_predict():
   image = cv2.resize(opencv_image1,(300,300))
   if option == "Translation in x":
      M = np.float32([[1, 0, 100], [0, 1, 20], [0, 0, 1]])
-     img3 = cv.warpPerspective(image, M, (image.shape[1], image.shape[0]))
-     st.image(sheared_imgx,  use_column_width=True)
+     img3 = cv2.warpPerspective(image, M, (image.shape[1], image.shape[0]))
+     st.image(img3,  use_column_width=True)
      
   else:
      M = np.float32([[1, 0, -100], [0, 1, 20], [0, 0, 1]])
-     img4 = cv.warpPerspective(image, M, (image.shape[1], image.shape[0]))
+     img4 = cv2.warpPerspective(image, M, (image.shape[1], image.shape[0]))
      
-     st.image(sheared_imgy,  use_column_width=True)
+     st.image(img4,  use_column_width=True)
   return 0 
     
 if st.button("Click To Perform Operation"):
