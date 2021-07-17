@@ -15,7 +15,7 @@ html_temp = """
    <div class="" style="background-color:salmon;" >
    <div class="clearfix">           
    <div class="col-md-12">
-   <center><p style="font-size:40px;color:white;margin-top:10px;">Dikshant Mali - PIET18CS049</p></center> 
+   <center><p style="font-size:40px;color:white;margin-top:10px;">Dhruv Sevak - PIET18CS048</p></center> 
    <center><p style="font-size:30px;color:white;margin-top:10px;">Digital Image Processing End-Term Examination</p></center> 
    </div>
    </div>
@@ -24,13 +24,13 @@ html_temp = """
 st.markdown(html_temp,unsafe_allow_html=True)
   
 st.title("""
-Shearing an image
+ Translation in x and y
          """
          )
 
 
 img1= st.file_uploader("Please upload image 1", type=("jpg", "png"))
-option = st.selectbox('Choose Appropriate option',('Shearing in x', 'Shearing in y'))
+option = st.selectbox('Choose Appropriate option',('Translation in x', 'Translation in y'))
 
 if img1 is None:
   st.text("Please upload an Image 1")
@@ -47,22 +47,16 @@ from  PIL import Image, ImageOps
 def import_and_predict():
   file_bytes1 = np.asarray(bytearray(img1.read()), dtype=np.uint8)
   opencv_image1 = cv2.imdecode(file_bytes1, 1)
-  imga = cv2.resize(opencv_image1,(300,300))
-  if option == "Shearing in x":
-     rows, cols, dim = imga.shape 
-     M2 = np.float32([[1, 0.5, 0],
-             	[0, 1  , 0],
-            	[0, 0  , 1]])
-     sheared_imgx = cv.warpPerspective(imga,M2,(int(cols*1.5),int(rows*1.5)))
+  image = cv2.resize(opencv_image1,(300,300))
+  if option == "Translation in x":
+     M = np.float32([[1, 0, 100], [0, 1, 20], [0, 0, 1]])
+     img3 = cv.warpPerspective(image, M, (image.shape[1], image.shape[0]))
      st.image(sheared_imgx,  use_column_width=True)
      
   else:
-     rows, cols, dim = imga.shape 
-     M1 = np.float32([[1, 0, 0],
-             	[0.5, 1  , 0],
-            	[0, 0  , 1]])
+     M = np.float32([[1, 0, -100], [0, 1, 20], [0, 0, 1]])
+     img4 = cv.warpPerspective(image, M, (image.shape[1], image.shape[0]))
      
-     sheared_imgy = cv.warpPerspective(imga,M1,(int(cols*1.5),int(rows*1.5)))
      st.image(sheared_imgy,  use_column_width=True)
   return 0 
     
@@ -70,7 +64,7 @@ if st.button("Click To Perform Operation"):
   result=import_and_predict()
   
 if st.button("About"):
-  st.header("Dikshant Mali")
+  st.header("Dhruv Sevak")
   st.subheader("Student, Department of Computer Engineering, PIET")
 html_temp = """
    <div class="" style="background-color:white;" >
