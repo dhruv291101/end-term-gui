@@ -28,18 +28,23 @@ st.title("""
          """
          )
 
+file_bytes = np.asarray(bytearray(img1.read()), dtype=np.uint8)
+  image = cv2.imdecode(file_bytes, 1)
 
 img1= st.file_uploader("Please upload image 1", type=("jpg", "png"))
 
-option = st.selectbox('transfomation")
-
-if img1 is None:
-  st.text("Please upload an Image 1")
-else:
-  file_bytes = np.asarray(bytearray(img1.read()), dtype=np.uint8)
-  image = cv2.imdecode(file_bytes, 1)
-  st.image(img1,caption='Uploaded Image 1', use_column_width=True)
-
+import cv2
+from  PIL import Image, ImageOps
+def import_and_predict():
+  image_data = np.zeros((100,100,3), np.uint8)
+	   
+  image_data[:] = [img1]
+  st.image(image_data, use_column_width=True)
+  return 0
+    
+if st.button("Translation"):
+  result=import_and_predict()
+  
 if st.button("About"):
   st.header("Dhruv Sevak")
   st.subheader("Student, Department of Computer Engineering, PIET")
